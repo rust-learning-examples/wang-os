@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 bootloader = "0.9"
+volatile = "0.4"
+lazy_static = { version = "1", features = ["spin_no_std"] }
+spin = "0.9" # 自旋锁
