@@ -6,4 +6,6 @@ build-std = ["core", "compiler_builtins"]
 target = "x86_64-wang_os.json"
 
 [target.'cfg(target_os = "none")']
-runner = "bootimage runner" # 它将给定的可执行文件与项目的引导程序依赖项链接，然后在QEMU中启动它
+# 它将给定的可执行文件与项目的引导程序依赖项链接，然后在QEMU中启动它
+# cargo build && qemu-system-x86_64 -drive format=raw,file=target/x86_64-wang_os/debug/bootimage-os.bin
+runner = "bootimage runner"

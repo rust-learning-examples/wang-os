@@ -4,9 +4,23 @@ version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[package.metadata.bootimage]
+test-args = [
+    "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04", #isa-debug-exit的特殊设备提供了一种从客户系统（guest system）里退出QEMU的简单方式
+    "-serial", "stdio", # -serial 参数将输出重定向到stdout
+    "-display", "none"
+]
+test-success-exit-code = 33 # (0x10 << 1) | 1
+test-timeout = 300 # (in seconds)
+
+[[test]]
+name = "should_panic"
+harness = false # 禁用test runner
 
 [dependencies]
 bootloader = "0.9"
 volatile = "0.4"
 lazy_static = { version = "1", features = ["spin_no_std"] }
 spin = "0.9" # 自旋锁
+x86_64 = "0.14"
+uart_16550 = "0.2" # 通过串口来发送数据

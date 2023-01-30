@@ -142,6 +142,12 @@ lazy_static! {
     });
 }
 
+#[doc(hidden)]
+pub fn _print(args: fmt::Arguments) {
+    use core::fmt::Write;
+    WRITER.lock().write_fmt(args).unwrap();
+}
+
 #[macro_export]
 macro_rules! print {
     ($($arg:tt)*) => ($crate::vga_buffer::_print(format_args!($($arg)*)));
@@ -153,8 +159,29 @@ macro_rules! println {
     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
 }
 
-#[doc(hidden)]
-pub fn _print(args: fmt::Arguments) {
-    use core::fmt::Write;
-    WRITER.lock().write_fmt(args).unwrap();
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test_case]
+    fn test_println_simple() { // 验证 println是否正常运行而不会panic
+        println!("test_println_simple output");
+    }
+    #[test_case]
+    fn test_println_many() { // 打印很多行且有些行超出屏幕的情况下也没有panic发生
+        for _ in 0..200 {
+            println!("test_println_many output");
+        }
+    }
+    #[test_case]
+    fn test_println_output() { // 验证打印的几行字符是否真的出现在了屏幕上
+        let s = "Some test string that fits on a single line";
+        println!("{}", s);
+        for (i, c) in s.chars().enumerate() {
+            let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT - 2][i].read();
+            assert_eq!(char::from(screen_char.ascii_character), c);
+        }
+    }
+    // #[test_case]
+    // fn it_works() {}
 }
