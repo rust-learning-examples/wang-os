@@ -3,7 +3,6 @@
 #![feature(abi_x86_interrupt)]
 
 use core::panic::PanicInfo;
-use os::serial_print;
 use lazy_static::lazy_static;
 use x86_64::structures::idt::InterruptDescriptorTable;
 use x86_64::structures::idt::InterruptStackFrame;
@@ -22,7 +21,8 @@ lazy_static! {
 extern "x86-interrupt" fn test_double_fault_handler(_stack_frame: InterruptStackFrame, _error_code: u64, ) -> ! {
     serial_println!("[ok]");
     exit_qemu(QemuExitCode::Success);
-    loop {}
+
+    os::hlt_loop();
 }
 
 pub fn init_test_idt() {

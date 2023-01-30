@@ -27,3 +27,5 @@ lazy_static = { version = "1", features = ["spin_no_std"] }
 spin = "0.9" # 自旋锁
 x86_64 = "0.14"
 uart_16550 = "0.2" # 通过串口来发送数据
+pic8259 = "0.10"
+pc-keyboard = "0.6"
