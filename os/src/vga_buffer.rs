@@ -48,14 +48,10 @@ struct ScreenChar {
 }
 impl core::ops::Deref for ScreenChar {
     type Target = ScreenChar;
-    fn deref(&self) -> &Self::Target {
-        self
-    }
+    fn deref(&self) -> &Self::Target { self }
 }
 impl core::ops::DerefMut for ScreenChar {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        self
-    }
+    fn deref_mut(&mut self) -> &mut Self::Target { self }
 }
 
 const BUFFER_HEIGHT: usize = 25;

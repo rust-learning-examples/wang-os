@@ -16,6 +16,9 @@ test-timeout = 300 # (in seconds)
 [[test]]
 name = "should_panic"
 harness = false # 禁用test runner
+[[test]]
+name = "stack_overflow"
+harness = false # 禁用test runner
 
 [dependencies]
 bootloader = "0.9"

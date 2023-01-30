@@ -10,6 +10,7 @@ use os::println;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    os::init();
     println!("Hello World{}", "!");
 
     #[cfg(test)]
