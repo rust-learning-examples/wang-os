@@ -21,7 +21,7 @@ name = "stack_overflow"
 harness = false # 禁用test runner
 
 [dependencies]
-bootloader = "0.9"
+bootloader = { version = "0.9", features = ["map_physical_memory"] }
 volatile = "0.4"
 lazy_static = { version = "1", features = ["spin_no_std"] }
 spin = "0.9" # 自旋锁

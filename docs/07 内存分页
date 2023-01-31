@@ -1,0 +1,4 @@
+---
+参考文档
+* https://os.phil-opp.com/zh-CN/paging-introduction/
+* https://os.phil-opp.com/paging-implementation/ (中文：https://www.bookstack.cn/read/writing-an-os-in-rust/09-paging-implementation.md)
